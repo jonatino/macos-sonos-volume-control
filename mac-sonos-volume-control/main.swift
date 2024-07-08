@@ -8,7 +8,6 @@ class OSDUtils: NSObject {
     enum Command: Int64 {
         case audioSpeakerVolume = 1
         case audioMuteScreenBlank = 3
-        case contrast = 0
     }
     
     enum OSDImage: Int64 {
@@ -25,10 +24,6 @@ class OSDUtils: NSObject {
             osdImage = value > 0 ? .audioSpeaker : .audioSpeakerMuted
         case .audioMuteScreenBlank:
             osdImage = .audioSpeakerMuted
-        case .contrast:
-            osdImage = .contrast
-        default:
-            osdImage = .brightness
         }
         return osdImage
     }
@@ -132,36 +127,30 @@ let displayID = getPrimaryDisplayID() ?? 0
 print("Requesting accessibility permissions...")
 if requestAccessibilityPermissions() {
     print("Accessibility permissions granted.")
-    print("Starting media key monitoring...")
-
-    let sonosClient = SonosModel()
 
     class MediaKeyTapDelegateImpl: MediaKeyTapDelegate {
-        let sonosClient: SonosModel
-
-        init(sonosClient: SonosModel) {
-            self.sonosClient = sonosClient
-        }
+        var sonosClient: SonosModel? = nil
 
         func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
-            if (event?.keyPressed == false) {
-                print("Media key event received: \(mediaKey) \(event) \(modifiers)")
+            if (event?.keyPressed == false && sonosClient != nil) {
+                //print("Media key event received: \(mediaKey) \(String(describing: event)) \(String(describing: modifiers))")
+                
                 switch mediaKey {
                 case .volumeUp:
-                    sonosClient.sendKeypressToSonos(keypress: RemoteKey.KEY_VOLUMEUP)
-                    let currentVolume = sonosClient.currentVolume
+                    sonosClient!.sendKeypressToSonos(keypress: RemoteKey.KEY_VOLUMEUP)
+                    let currentVolume = sonosClient!.currentVolume
                     print("Current volume up: \(currentVolume)")
                     OSDUtils.showOsd(displayID: displayID, command: .audioSpeakerVolume, value: normalize(currentVolume))
                     
                 case .volumeDown:
-                    sonosClient.sendKeypressToSonos(keypress: RemoteKey.KEY_VOLUMEDOWN)
-                    let currentVolume = sonosClient.currentVolume
+                    sonosClient!.sendKeypressToSonos(keypress: RemoteKey.KEY_VOLUMEDOWN)
+                    let currentVolume = sonosClient!.currentVolume
                     print("Current volume down: \(currentVolume)")
                     OSDUtils.showOsd(displayID: displayID, command: .audioSpeakerVolume, value: normalize(currentVolume))
                     
                 case .mute:
-                    sonosClient.sendKeypressToSonos(keypress: RemoteKey.KEY_VOLUMEMUTE)
-                    let currentVolume = sonosClient.currentVolume
+                    sonosClient!.sendKeypressToSonos(keypress: RemoteKey.KEY_VOLUMEMUTE)
+                    let currentVolume = sonosClient!.currentVolume
                     print("Current volume mute: \(currentVolume)")
                     // TODO restore this volume after we unmute.
                     OSDUtils.showOsd(displayID: displayID, command: .audioMuteScreenBlank, value: 0)
@@ -172,14 +161,26 @@ if requestAccessibilityPermissions() {
             }
         }
     }
-
-    let delegate = MediaKeyTapDelegateImpl(sonosClient: sonosClient)
+    
+    print("Starting media key monitoring...")
+    let delegate = MediaKeyTapDelegateImpl()
     let mediaKeyTap = MediaKeyTap(delegate: delegate, on: .keyDownAndUp)
-
+    
+    print("Bind media keys")
     mediaKeyTap.start()
-
+    
+    print("Connecting to sonos device");
+    let sonosClient = SonosModel()
+    sonosClient.connect() {
+        print("Connected loading volume");
+        sonosClient.sendKeypressToSonos(keypress: RemoteKey.KEY_LOADVOLUME)
+        delegate.sonosClient = sonosClient
+    }
+    
     print("Entering run loop...")
     RunLoop.main.run()
 } else {
     print("Accessibility permissions not granted. Exiting...")
 }
+
+

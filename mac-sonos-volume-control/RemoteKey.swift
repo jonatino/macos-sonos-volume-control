@@ -12,6 +12,7 @@ enum RemoteKey: String {
     case KEY_VOLUMEDOWN
     case KEY_VOLUMEUP
     case KEY_VOLUMEMUTE
+    case KEY_LOADVOLUME
     case KEY_PREVIOUSSONG
     case KEY_NEXTSONG
 }

@@ -17,45 +17,42 @@ import SonosAPI
     private(set) var batterryPercentage = 0
     private(set) var currentVolume = 0
     
-    // MARK: - Set the callback URL to the URL of the computer running this application. Default port is 1337 - or use another available port on your computer.
-    private var callbackURL = URL(string: "http://172.27.1.76:1337")
     // MARK: - Set the coordinator's name to the name of the Sonos Room you wish to control.
     private var coordinatorName = "Bedroom"
-
+    
     private var coordinatorURL: URL?
     private var subscriptions: Set<AnyCancellable> = []
     private var temporarySubscription: AnyCancellable?
-  
     
-    init() {
-        
+    
+    func connect(callback: @escaping () -> Void) {
         // Clean-up when app terminates.
         NotificationCenter.default.addObserver(forName: NSApplication.willTerminateNotification, object: nil, queue: .main) { _ in
             self.temporarySubscription?.cancel()
             self.subscriptions.removeAll()
         }
-        
-        getDevices()
+
+        self.getDevices() {
+            callback()
+        }
     }
     
     /// Retrieve Sonos devices on the local network.
-    private func getDevices() {
-        
+    private func getDevices(callback: @escaping () -> Void) {
         let ssdp = SSDPSession()
         var sonosDevices = [SonosDevice]()
         
         temporarySubscription = ssdp.onDeviceFound.sink { completion in
-            
             self.temporarySubscription?.cancel()
             
             switch completion {
-                
             case .failure(let error):
                 fatalError(error.description)
                 
             case .finished:
-                // Once we have the Sonos devices, find out the groups (zones) coordinators.
-                self.retrieveHouseholdCoordinators(for: sonosDevices)
+                self.retrieveHouseholdCoordinators(for: sonosDevices) {
+                    callback()
+                }
             }
         } receiveValue: { record in
             sonosDevices.append(record)
@@ -68,10 +65,9 @@ import SonosAPI
         }
     }
     
-    /// Retrieve  zone/household groups with their  corrdinator id.
+    /// Retrieve zone/household groups with their coordinator id.
     /// - Parameter sonosDevices: Sonos devices.
-    private func retrieveHouseholdCoordinators(for sonosDevices: [SonosDevice]) {
-        
+    private func retrieveHouseholdCoordinators(for sonosDevices: [SonosDevice], callback: @escaping () -> Void) {
         guard sonosDevices.count > 0 else { return }
         guard let url = sonosDevices[0].hostURL else { return }
         
@@ -80,11 +76,9 @@ import SonosAPI
         let session = SOAPActionSession(service: .zoneGroupTopology(action: .getZoneGroupState, url: url))
         
         temporarySubscription = session.onDataReceived.sink { completion in
-            
             self.temporarySubscription?.cancel()
             
             switch completion {
-                
             case .finished:
                 break
                 
@@ -93,9 +87,7 @@ import SonosAPI
             }
             
         } receiveValue: { json in
-            
             parseJSONToObject(json: json) { (groupData: ZoneGroupTopology?) in
-                
                 guard let groupData else { return }
                 
                 for zoneGroup in groupData.zoneGroupState.zoneGroups.zoneGroup {
@@ -109,7 +101,7 @@ import SonosAPI
                                 name = "\(zoneGroupMember.zoneName) + \(zoneGroup.zoneGroupMember.count - 1)"
                             }
                             
-                            let  group = SonosGroup(id: zoneGroupMember.uuid, coordinatorURL: zoneGroupMember.hostURL!, name: name)
+                            let group = SonosGroup(id: zoneGroupMember.uuid, coordinatorURL: zoneGroupMember.hostURL!, name: name)
                             groups.append(group)
                         }
                     }
@@ -119,9 +111,7 @@ import SonosAPI
                 let group = groups.first (where: { $0.name == self.coordinatorName })
                 if let group {
                     self.coordinatorURL = group.coordinatorURL
-                    self.listenToAVTransportEvents()
-                    //self.processKeypress()
-                    
+                    callback()
                 } else {
                     fatalError("Sonos Group \(self.coordinatorName) cannot be found.")
                 }
@@ -162,6 +152,10 @@ import SonosAPI
             
             session = SOAPActionSession(service: .groupRenderingControl(action: .setRelativeGroupVolume, url: coordinatorURL, adjustment: -200))
             
+        case .KEY_LOADVOLUME:
+            
+            session = SOAPActionSession(service: .groupRenderingControl(action: .setRelativeGroupVolume, url: coordinatorURL, adjustment: 0))
+            
         case .KEY_PREVIOUSSONG:
             
             action = .previous
@@ -196,75 +190,6 @@ import SonosAPI
             }
         }
         session.run()
-    }
-    
-    /// Listen to Sonos AV Transport Events.
-    private func listenToAVTransportEvents() {
-        
-        guard let coordinatorURL else { fatalError("Coordinator URL is not set.") }
-        
-        guard let callbackURL else {
-            fatalError("Invalid callback URL.")
-        }
-        
-        let eventSession = SOAPEventSession(callbackURL: callbackURL)
-        
-        eventSession.onDataReceived.sink { completion in
-            
-            switch completion {
-                
-            case .finished:
-                print("\(#function): Finished?")
-                break
-            case .failure(let error):
-                print("At \(Date().formatted())")
-                print("**** Error in \(#function) : \(error.description) *****")
-            }
-            
-        } receiveValue: { jsonData in
-            
-            switch jsonData.sonosService {
-                
-            case .avTransport:
-                
-                parseJSONToObject(json: jsonData.json) { (avTransport: AVTransport?) in
-                    
-                    guard let avTransport else { return }
-                    
-                    if avTransport.transportState == .playing {
-                        
-                        self.playPauseState = .play
-                        
-                    } else {
-                        
-                        if avTransport.transportState == .stopped || avTransport.transportState == .pausedPlayback {
-                            
-                            self.playPauseState = .pause
-                        }
-                        return
-                    }
-                
-                }
-                
-            case .groupRenderingControl:
-                parseJSONToObject(json: jsonData.json) { (groupRenderingControl: GroupRenderingControl?) in
-                    
-                    if let groupRenderingControl {
-                        self.currentVolume = groupRenderingControl.groupVolume
-                    }
-                }
-                
-            default:
-                break
-            }
-            
-        }
-        .store(in: &subscriptions)
-        
-        Task {
-            await eventSession.subscribeToEvents(events: [.subscription(service: .avTransport), .subscription(service: .groupRenderingControl)], hostURL: coordinatorURL)
-        }
-        
     }
     
 }

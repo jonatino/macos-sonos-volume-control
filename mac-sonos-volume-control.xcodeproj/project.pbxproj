@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6614E71A2C368EF10057153E /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6614E7192C368EF10057153E /* OSD.framework */; };
-		6614E7212C369A8A0057153E /* MediaKeyTap in Frameworks */ = {isa = PBXBuildFile; productRef = 6614E7202C369A8A0057153E /* MediaKeyTap */; };
-		66643A002C3BB69E00FBE53B /* SonosAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 666439FF2C3BB69E00FBE53B /* SonosAPI */; };
 		66643A022C3BB6E400FBE53B /* RemoteKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66643A012C3BB6E000FBE53B /* RemoteKey.swift */; };
 		66643A052C3BB98000FBE53B /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66643A032C3BB73D00FBE53B /* Network.framework */; };
 		66643A092C3BBA3100FBE53B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66643A082C3BBA3100FBE53B /* Foundation.framework */; };
@@ -20,6 +18,8 @@
 		66643A132C3BBA7700FBE53B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66643A122C3BBA7700FBE53B /* CoreGraphics.framework */; };
 		668B0D0D2C367F8500C159E4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668B0D0C2C367F8500C159E4 /* main.swift */; };
 		66D57F392C3BB5760027878C /* SonosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D57F382C3BB5730027878C /* SonosModel.swift */; };
+		66FEA5742C3BC22500C46BCA /* SonosAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 66FEA5732C3BC22500C46BCA /* SonosAPI */; };
+		66FEA5772C3BC25C00C46BCA /* MediaKeyTap in Frameworks */ = {isa = PBXBuildFile; productRef = 66FEA5762C3BC25C00C46BCA /* MediaKeyTap */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,10 +46,10 @@
 		66643A0E2C3BBA6400FBE53B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		66643A102C3BBA6D00FBE53B /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		66643A122C3BBA7700FBE53B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		668B0D092C367F8500C159E4 /* volumecuntroll */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = volumecuntroll; path = "/Users/jonathanbeaudoin/Library/Mobile Documents/com~apple~CloudDocs/cuntroll/volumecuntroll/build/Debug/volumecuntroll"; sourceTree = "<absolute>"; };
 		668B0D0C2C367F8500C159E4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		668B0D142C36801C00C159E4 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		66D57F382C3BB5730027878C /* SonosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosModel.swift; sourceTree = "<group>"; };
+		66FEA5712C3BBF7D00C46BCA /* mac-sonos-volume-control */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "mac-sonos-volume-control"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,16 +57,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66643A002C3BB69E00FBE53B /* SonosAPI in Frameworks */,
 				66643A092C3BBA3100FBE53B /* Foundation.framework in Frameworks */,
 				6614E71A2C368EF10057153E /* OSD.framework in Frameworks */,
-				6614E7212C369A8A0057153E /* MediaKeyTap in Frameworks */,
 				66643A112C3BBA6D00FBE53B /* ApplicationServices.framework in Frameworks */,
 				66643A0F2C3BBA6400FBE53B /* Cocoa.framework in Frameworks */,
 				66643A0D2C3BBA4B00FBE53B /* AppKit.framework in Frameworks */,
 				66643A0B2C3BBA4600FBE53B /* Combine.framework in Frameworks */,
 				66643A132C3BBA7700FBE53B /* CoreGraphics.framework in Frameworks */,
+				66FEA5772C3BC25C00C46BCA /* MediaKeyTap in Frameworks */,
 				66643A052C3BB98000FBE53B /* Network.framework in Frameworks */,
+				66FEA5742C3BC22500C46BCA /* SonosAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +85,7 @@
 		668B0D0A2C367F8500C159E4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				66FEA5712C3BBF7D00C46BCA /* mac-sonos-volume-control */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -120,9 +121,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		668B0D082C367F8500C159E4 /* volumecuntroll */ = {
+		668B0D082C367F8500C159E4 /* mac-sonos-volume-control */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 668B0D102C367F8500C159E4 /* Build configuration list for PBXNativeTarget "volumecuntroll" */;
+			buildConfigurationList = 668B0D102C367F8500C159E4 /* Build configuration list for PBXNativeTarget "mac-sonos-volume-control" */;
 			buildPhases = (
 				668B0D052C367F8500C159E4 /* Sources */,
 				668B0D062C367F8500C159E4 /* Frameworks */,
@@ -132,13 +133,13 @@
 			);
 			dependencies = (
 			);
-			name = volumecuntroll;
+			name = "mac-sonos-volume-control";
 			packageProductDependencies = (
-				6614E7202C369A8A0057153E /* MediaKeyTap */,
-				666439FF2C3BB69E00FBE53B /* SonosAPI */,
+				66FEA5732C3BC22500C46BCA /* SonosAPI */,
+				66FEA5762C3BC25C00C46BCA /* MediaKeyTap */,
 			);
 			productName = volumecuntroll;
-			productReference = 668B0D092C367F8500C159E4 /* volumecuntroll */;
+			productReference = 66FEA5712C3BBF7D00C46BCA /* mac-sonos-volume-control */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -166,14 +167,14 @@
 			);
 			mainGroup = 668B0D002C367F8500C159E4;
 			packageReferences = (
-				6614E71F2C3698BD0057153E /* XCRemoteSwiftPackageReference "MediaKeyTap" */,
-				666439FE2C3BB69E00FBE53B /* XCRemoteSwiftPackageReference "SonosAPI" */,
+				66FEA5722C3BC22500C46BCA /* XCRemoteSwiftPackageReference "SonosAPI" */,
+				66FEA5752C3BC25C00C46BCA /* XCRemoteSwiftPackageReference "MediaKeyTap" */,
 			);
 			productRefGroup = 668B0D0A2C367F8500C159E4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				668B0D082C367F8500C159E4 /* volumecuntroll */,
+				668B0D082C367F8500C159E4 /* mac-sonos-volume-control */,
 			);
 		};
 /* End PBXProject section */
@@ -317,12 +318,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HJCMQLW46C;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)",
 					"/System/Library/PrivateFrameworks/**",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "";
-				PRODUCT_NAME = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "volumecuntroll/Bridging-Header.h";
+				PRODUCT_BUNDLE_IDENTIFIER = "mac-sonos-volume-control";
+				PRODUCT_NAME = "mac-sonos-volume-control";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/mac-sonos-volume-control/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 			};
@@ -335,12 +336,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HJCMQLW46C;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)",
 					"/System/Library/PrivateFrameworks/**",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "";
-				PRODUCT_NAME = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "volumecuntroll/Bridging-Header.h";
+				PRODUCT_BUNDLE_IDENTIFIER = "mac-sonos-volume-control";
+				PRODUCT_NAME = "mac-sonos-volume-control";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 			};
@@ -358,7 +359,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		668B0D102C367F8500C159E4 /* Build configuration list for PBXNativeTarget "volumecuntroll" */ = {
+		668B0D102C367F8500C159E4 /* Build configuration list for PBXNativeTarget "mac-sonos-volume-control" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				668B0D112C367F8500C159E4 /* Debug */,
@@ -370,34 +371,34 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6614E71F2C3698BD0057153E /* XCRemoteSwiftPackageReference "MediaKeyTap" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/MonitorControl/MediaKeyTap";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		666439FE2C3BB69E00FBE53B /* XCRemoteSwiftPackageReference "SonosAPI" */ = {
+		66FEA5722C3BC22500C46BCA /* XCRemoteSwiftPackageReference "SonosAPI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/denisblondeau/SonosAPI";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.0;
+				kind = exactVersion;
+				version = 1.3.0;
+			};
+		};
+		66FEA5752C3BC25C00C46BCA /* XCRemoteSwiftPackageReference "MediaKeyTap" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MonitorControl/MediaKeyTap.git";
+			requirement = {
+				kind = revision;
+				revision = 22293b608bb9e7072960a2002d77ebbbdb3ba859;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6614E7202C369A8A0057153E /* MediaKeyTap */ = {
+		66FEA5732C3BC22500C46BCA /* SonosAPI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6614E71F2C3698BD0057153E /* XCRemoteSwiftPackageReference "MediaKeyTap" */;
-			productName = MediaKeyTap;
-		};
-		666439FF2C3BB69E00FBE53B /* SonosAPI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 666439FE2C3BB69E00FBE53B /* XCRemoteSwiftPackageReference "SonosAPI" */;
+			package = 66FEA5722C3BC22500C46BCA /* XCRemoteSwiftPackageReference "SonosAPI" */;
 			productName = SonosAPI;
+		};
+		66FEA5762C3BC25C00C46BCA /* MediaKeyTap */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 66FEA5752C3BC25C00C46BCA /* XCRemoteSwiftPackageReference "MediaKeyTap" */;
+			productName = MediaKeyTap;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
