@@ -1,0 +1,24 @@
+{
+  "originHash" : "892c5354931b8384356a64830a713ac32f90c20a9b5a717045ab9a2af2e7e31a",
+  "pins" : [
+    {
+      "identity" : "mediakeytap",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MonitorControl/MediaKeyTap",
+      "state" : {
+        "branch" : "master",
+        "revision" : "22293b608bb9e7072960a2002d77ebbbdb3ba859"
+      }
+    },
+    {
+      "identity" : "sonosapi",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/denisblondeau/SonosAPI",
+      "state" : {
+        "revision" : "ba276392381f20ad3c01717ff5b5fb5ee41acb89",
+        "version" : "1.3.0"
+      }
+    }
+  ],
+  "version" : 3
+}

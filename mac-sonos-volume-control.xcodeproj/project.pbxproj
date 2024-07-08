@@ -1,0 +1,405 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6614E71A2C368EF10057153E /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6614E7192C368EF10057153E /* OSD.framework */; };
+		6614E7212C369A8A0057153E /* MediaKeyTap in Frameworks */ = {isa = PBXBuildFile; productRef = 6614E7202C369A8A0057153E /* MediaKeyTap */; };
+		66643A002C3BB69E00FBE53B /* SonosAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 666439FF2C3BB69E00FBE53B /* SonosAPI */; };
+		66643A022C3BB6E400FBE53B /* RemoteKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66643A012C3BB6E000FBE53B /* RemoteKey.swift */; };
+		66643A052C3BB98000FBE53B /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66643A032C3BB73D00FBE53B /* Network.framework */; };
+		66643A092C3BBA3100FBE53B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66643A082C3BBA3100FBE53B /* Foundation.framework */; };
+		66643A0B2C3BBA4600FBE53B /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66643A0A2C3BBA4600FBE53B /* Combine.framework */; };
+		66643A0D2C3BBA4B00FBE53B /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66643A0C2C3BBA4B00FBE53B /* AppKit.framework */; };
+		66643A0F2C3BBA6400FBE53B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66643A0E2C3BBA6400FBE53B /* Cocoa.framework */; };
+		66643A112C3BBA6D00FBE53B /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66643A102C3BBA6D00FBE53B /* ApplicationServices.framework */; };
+		66643A132C3BBA7700FBE53B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66643A122C3BBA7700FBE53B /* CoreGraphics.framework */; };
+		668B0D0D2C367F8500C159E4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668B0D0C2C367F8500C159E4 /* main.swift */; };
+		66D57F392C3BB5760027878C /* SonosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D57F382C3BB5730027878C /* SonosModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		668B0D072C367F8500C159E4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		6614E7192C368EF10057153E /* OSD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSD.framework; path = ../../../../../../../System/Library/PrivateFrameworks/OSD.framework; sourceTree = "<group>"; };
+		6614E71D2C3690520057153E /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		66643A012C3BB6E000FBE53B /* RemoteKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteKey.swift; sourceTree = "<group>"; };
+		66643A032C3BB73D00FBE53B /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = System/Library/Frameworks/Network.framework; sourceTree = SDKROOT; };
+		66643A062C3BB98000FBE53B /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		66643A082C3BBA3100FBE53B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		66643A0A2C3BBA4600FBE53B /* Combine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Combine.framework; path = System/Library/Frameworks/Combine.framework; sourceTree = SDKROOT; };
+		66643A0C2C3BBA4B00FBE53B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		66643A0E2C3BBA6400FBE53B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		66643A102C3BBA6D00FBE53B /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		66643A122C3BBA7700FBE53B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		668B0D092C367F8500C159E4 /* volumecuntroll */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = volumecuntroll; path = "/Users/jonathanbeaudoin/Library/Mobile Documents/com~apple~CloudDocs/cuntroll/volumecuntroll/build/Debug/volumecuntroll"; sourceTree = "<absolute>"; };
+		668B0D0C2C367F8500C159E4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		668B0D142C36801C00C159E4 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		66D57F382C3BB5730027878C /* SonosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		668B0D062C367F8500C159E4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66643A002C3BB69E00FBE53B /* SonosAPI in Frameworks */,
+				66643A092C3BBA3100FBE53B /* Foundation.framework in Frameworks */,
+				6614E71A2C368EF10057153E /* OSD.framework in Frameworks */,
+				6614E7212C369A8A0057153E /* MediaKeyTap in Frameworks */,
+				66643A112C3BBA6D00FBE53B /* ApplicationServices.framework in Frameworks */,
+				66643A0F2C3BBA6400FBE53B /* Cocoa.framework in Frameworks */,
+				66643A0D2C3BBA4B00FBE53B /* AppKit.framework in Frameworks */,
+				66643A0B2C3BBA4600FBE53B /* Combine.framework in Frameworks */,
+				66643A132C3BBA7700FBE53B /* CoreGraphics.framework in Frameworks */,
+				66643A052C3BB98000FBE53B /* Network.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		668B0D002C367F8500C159E4 = {
+			isa = PBXGroup;
+			children = (
+				668B0D0B2C367F8500C159E4 /* mac-sonos-volume-control */,
+				668B0D0A2C367F8500C159E4 /* Products */,
+				668B0D132C36801C00C159E4 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		668B0D0A2C367F8500C159E4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		668B0D0B2C367F8500C159E4 /* mac-sonos-volume-control */ = {
+			isa = PBXGroup;
+			children = (
+				66643A012C3BB6E000FBE53B /* RemoteKey.swift */,
+				66D57F382C3BB5730027878C /* SonosModel.swift */,
+				6614E71D2C3690520057153E /* Bridging-Header.h */,
+				668B0D0C2C367F8500C159E4 /* main.swift */,
+			);
+			path = "mac-sonos-volume-control";
+			sourceTree = "<group>";
+		};
+		668B0D132C36801C00C159E4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				66643A122C3BBA7700FBE53B /* CoreGraphics.framework */,
+				66643A102C3BBA6D00FBE53B /* ApplicationServices.framework */,
+				66643A0E2C3BBA6400FBE53B /* Cocoa.framework */,
+				66643A0C2C3BBA4B00FBE53B /* AppKit.framework */,
+				66643A0A2C3BBA4600FBE53B /* Combine.framework */,
+				66643A082C3BBA3100FBE53B /* Foundation.framework */,
+				66643A062C3BB98000FBE53B /* NetworkExtension.framework */,
+				66643A032C3BB73D00FBE53B /* Network.framework */,
+				6614E7192C368EF10057153E /* OSD.framework */,
+				668B0D142C36801C00C159E4 /* CoreAudio.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		668B0D082C367F8500C159E4 /* volumecuntroll */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 668B0D102C367F8500C159E4 /* Build configuration list for PBXNativeTarget "volumecuntroll" */;
+			buildPhases = (
+				668B0D052C367F8500C159E4 /* Sources */,
+				668B0D062C367F8500C159E4 /* Frameworks */,
+				668B0D072C367F8500C159E4 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = volumecuntroll;
+			packageProductDependencies = (
+				6614E7202C369A8A0057153E /* MediaKeyTap */,
+				666439FF2C3BB69E00FBE53B /* SonosAPI */,
+			);
+			productName = volumecuntroll;
+			productReference = 668B0D092C367F8500C159E4 /* volumecuntroll */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		668B0D012C367F8500C159E4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					668B0D082C367F8500C159E4 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = 668B0D042C367F8500C159E4 /* Build configuration list for PBXProject "mac-sonos-volume-control" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 668B0D002C367F8500C159E4;
+			packageReferences = (
+				6614E71F2C3698BD0057153E /* XCRemoteSwiftPackageReference "MediaKeyTap" */,
+				666439FE2C3BB69E00FBE53B /* XCRemoteSwiftPackageReference "SonosAPI" */,
+			);
+			productRefGroup = 668B0D0A2C367F8500C159E4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				668B0D082C367F8500C159E4 /* volumecuntroll */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		668B0D052C367F8500C159E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66643A022C3BB6E400FBE53B /* RemoteKey.swift in Sources */,
+				66D57F392C3BB5760027878C /* SonosModel.swift in Sources */,
+				668B0D0D2C367F8500C159E4 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		668B0D0E2C367F8500C159E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		668B0D0F2C367F8500C159E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		668B0D112C367F8500C159E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HJCMQLW46C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"/System/Library/PrivateFrameworks/**",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "";
+				PRODUCT_NAME = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "volumecuntroll/Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+			};
+			name = Debug;
+		};
+		668B0D122C367F8500C159E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HJCMQLW46C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"/System/Library/PrivateFrameworks/**",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "";
+				PRODUCT_NAME = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "volumecuntroll/Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		668B0D042C367F8500C159E4 /* Build configuration list for PBXProject "mac-sonos-volume-control" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				668B0D0E2C367F8500C159E4 /* Debug */,
+				668B0D0F2C367F8500C159E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		668B0D102C367F8500C159E4 /* Build configuration list for PBXNativeTarget "volumecuntroll" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				668B0D112C367F8500C159E4 /* Debug */,
+				668B0D122C367F8500C159E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6614E71F2C3698BD0057153E /* XCRemoteSwiftPackageReference "MediaKeyTap" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MonitorControl/MediaKeyTap";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		666439FE2C3BB69E00FBE53B /* XCRemoteSwiftPackageReference "SonosAPI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/denisblondeau/SonosAPI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6614E7202C369A8A0057153E /* MediaKeyTap */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6614E71F2C3698BD0057153E /* XCRemoteSwiftPackageReference "MediaKeyTap" */;
+			productName = MediaKeyTap;
+		};
+		666439FF2C3BB69E00FBE53B /* SonosAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 666439FE2C3BB69E00FBE53B /* XCRemoteSwiftPackageReference "SonosAPI" */;
+			productName = SonosAPI;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 668B0D012C367F8500C159E4 /* Project object */;
+}
