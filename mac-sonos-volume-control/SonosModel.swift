@@ -10,7 +10,6 @@ import Combine
 import Foundation
 import SonosAPI
 
-
 @Observable final class SonosModel {
     
     private(set) var playPauseState = AVTransportAction.pause
@@ -23,7 +22,6 @@ import SonosAPI
     private var coordinatorURL: URL?
     private var subscriptions: Set<AnyCancellable> = []
     private var temporarySubscription: AnyCancellable?
-    
     
     func connect(callback: @escaping () -> Void) {
         // Clean-up when app terminates.
@@ -68,8 +66,14 @@ import SonosAPI
     /// Retrieve zone/household groups with their coordinator id.
     /// - Parameter sonosDevices: Sonos devices.
     private func retrieveHouseholdCoordinators(for sonosDevices: [SonosDevice], callback: @escaping () -> Void) {
-        guard sonosDevices.count > 0 else { return }
-        guard let url = sonosDevices[0].hostURL else { return }
+        guard sonosDevices.count > 0 else {
+            print("Sonos devices was empty")
+            return
+        }
+        guard let url = sonosDevices[0].hostURL else { 
+            print("Host url was empty", sonosDevices)
+            return
+        }
         
         var groups = [SonosGroup]()
         

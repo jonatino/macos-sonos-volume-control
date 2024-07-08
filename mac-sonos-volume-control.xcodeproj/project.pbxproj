@@ -17,6 +17,7 @@
 		66643A112C3BBA6D00FBE53B /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66643A102C3BBA6D00FBE53B /* ApplicationServices.framework */; };
 		66643A132C3BBA7700FBE53B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66643A122C3BBA7700FBE53B /* CoreGraphics.framework */; };
 		668B0D0D2C367F8500C159E4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668B0D0C2C367F8500C159E4 /* main.swift */; };
+		6694F22D2C3C8944007E42A0 /* OSDUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6694F22C2C3C8941007E42A0 /* OSDUtils.swift */; };
 		66D57F392C3BB5760027878C /* SonosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D57F382C3BB5730027878C /* SonosModel.swift */; };
 		66FEA5742C3BC22500C46BCA /* SonosAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 66FEA5732C3BC22500C46BCA /* SonosAPI */; };
 		66FEA5772C3BC25C00C46BCA /* MediaKeyTap in Frameworks */ = {isa = PBXBuildFile; productRef = 66FEA5762C3BC25C00C46BCA /* MediaKeyTap */; };
@@ -48,8 +49,9 @@
 		66643A122C3BBA7700FBE53B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		668B0D0C2C367F8500C159E4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		668B0D142C36801C00C159E4 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		6694F22C2C3C8941007E42A0 /* OSDUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSDUtils.swift; sourceTree = "<group>"; };
 		66D57F382C3BB5730027878C /* SonosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosModel.swift; sourceTree = "<group>"; };
-		66FEA5712C3BBF7D00C46BCA /* mac-sonos-volume-control */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "mac-sonos-volume-control"; sourceTree = BUILT_PRODUCTS_DIR; };
+		66FEA5712C3BBF7D00C46BCA /* sonosctl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sonosctl; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +87,7 @@
 		668B0D0A2C367F8500C159E4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				66FEA5712C3BBF7D00C46BCA /* mac-sonos-volume-control */,
+				66FEA5712C3BBF7D00C46BCA /* sonosctl */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -93,6 +95,7 @@
 		668B0D0B2C367F8500C159E4 /* mac-sonos-volume-control */ = {
 			isa = PBXGroup;
 			children = (
+				6694F22C2C3C8941007E42A0 /* OSDUtils.swift */,
 				66643A012C3BB6E000FBE53B /* RemoteKey.swift */,
 				66D57F382C3BB5730027878C /* SonosModel.swift */,
 				6614E71D2C3690520057153E /* Bridging-Header.h */,
@@ -139,7 +142,7 @@
 				66FEA5762C3BC25C00C46BCA /* MediaKeyTap */,
 			);
 			productName = volumecuntroll;
-			productReference = 66FEA5712C3BBF7D00C46BCA /* mac-sonos-volume-control */;
+			productReference = 66FEA5712C3BBF7D00C46BCA /* sonosctl */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -184,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6694F22D2C3C8944007E42A0 /* OSDUtils.swift in Sources */,
 				66643A022C3BB6E400FBE53B /* RemoteKey.swift in Sources */,
 				66D57F392C3BB5760027878C /* SonosModel.swift in Sources */,
 				668B0D0D2C367F8500C159E4 /* main.swift in Sources */,
@@ -321,8 +325,9 @@
 					"$(PROJECT_DIR)",
 					"/System/Library/PrivateFrameworks/**",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "mac-sonos-volume-control";
-				PRODUCT_NAME = "mac-sonos-volume-control";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = Yes;
+				PRODUCT_BUNDLE_IDENTIFIER = sonosctl;
+				PRODUCT_NAME = sonosctl;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/mac-sonos-volume-control/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -339,8 +344,9 @@
 					"$(PROJECT_DIR)",
 					"/System/Library/PrivateFrameworks/**",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "mac-sonos-volume-control";
-				PRODUCT_NAME = "mac-sonos-volume-control";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = Yes;
+				PRODUCT_BUNDLE_IDENTIFIER = sonosctl;
+				PRODUCT_NAME = sonosctl;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(inherited)";
