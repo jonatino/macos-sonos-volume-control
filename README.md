@@ -5,9 +5,13 @@ The goals for this app are simple. Adjust the volume of an external sonos device
 This app does 3 things:
 - Hooks the volume up, volume down, and mute keys (to control the volume. This is why "Accessibility" permission is needed)
 - When any of those buttons are pressed, a command is sent to your Sonos device telling it to change the volume. It then reports back its current volume level.
-- To show the user the volume is changing, we use some of Apple's private API's to fake the on-screen volume display. This allows us to emulate native volume changing behavior perfectly.
+- To show the user the volume is changing, we use some of Apple's private API's to fake the on-screen volume display (shout out to https://github.com/MonitorControl/MonitorControl). This allows us to emulate native volume changing behavior perfectly.
 
 Future goals (I'm open to contributions, but any additional complexity will be rejected):
 - Change to .app format instead of command line app
 - Tray icon with Quit/Settings option
 - Very basic ui with single input for Sonos device name
+
+Credits:
+https://github.com/MonitorControl/MonitorControl - For the volume OSD stuff
+https://github.com/denisblondeau/SonosAPIDemo - For the sonos api
