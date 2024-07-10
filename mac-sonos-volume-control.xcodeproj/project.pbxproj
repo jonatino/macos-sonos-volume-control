@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6614E71A2C368EF10057153E /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6614E7192C368EF10057153E /* OSD.framework */; };
-		66643A022C3BB6E400FBE53B /* RemoteKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66643A012C3BB6E000FBE53B /* RemoteKey.swift */; };
 		66643A052C3BB98000FBE53B /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66643A032C3BB73D00FBE53B /* Network.framework */; };
 		66643A092C3BBA3100FBE53B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66643A082C3BBA3100FBE53B /* Foundation.framework */; };
 		66643A0B2C3BBA4600FBE53B /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66643A0A2C3BBA4600FBE53B /* Combine.framework */; };
@@ -38,7 +37,6 @@
 /* Begin PBXFileReference section */
 		6614E7192C368EF10057153E /* OSD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSD.framework; path = ../../../../../../../System/Library/PrivateFrameworks/OSD.framework; sourceTree = "<group>"; };
 		6614E71D2C3690520057153E /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		66643A012C3BB6E000FBE53B /* RemoteKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteKey.swift; sourceTree = "<group>"; };
 		66643A032C3BB73D00FBE53B /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = System/Library/Frameworks/Network.framework; sourceTree = SDKROOT; };
 		66643A062C3BB98000FBE53B /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		66643A082C3BBA3100FBE53B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -96,7 +94,6 @@
 			isa = PBXGroup;
 			children = (
 				6694F22C2C3C8941007E42A0 /* OSDUtils.swift */,
-				66643A012C3BB6E000FBE53B /* RemoteKey.swift */,
 				66D57F382C3BB5730027878C /* SonosModel.swift */,
 				6614E71D2C3690520057153E /* Bridging-Header.h */,
 				668B0D0C2C367F8500C159E4 /* main.swift */,
@@ -188,7 +185,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6694F22D2C3C8944007E42A0 /* OSDUtils.swift in Sources */,
-				66643A022C3BB6E400FBE53B /* RemoteKey.swift in Sources */,
 				66D57F392C3BB5760027878C /* SonosModel.swift in Sources */,
 				668B0D0D2C367F8500C159E4 /* main.swift in Sources */,
 			);

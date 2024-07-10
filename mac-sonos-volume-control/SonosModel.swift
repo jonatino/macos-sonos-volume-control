@@ -12,31 +12,30 @@ import SonosAPI
 
 @Observable final class SonosModel {
     
-    private(set) var playPauseState = AVTransportAction.pause
-    private(set) var batterryPercentage = 0
     private(set) var currentVolume = 0
-    
-    // MARK: - Set the coordinator's name to the name of the Sonos Room you wish to control.
-    private var coordinatorName = "Bedroom"
     
     private var coordinatorURL: URL?
     private var subscriptions: Set<AnyCancellable> = []
     private var temporarySubscription: AnyCancellable?
     
-    func connect(callback: @escaping () -> Void) {
+    func connect(deviceName: String, callback: @escaping () -> Void) {
+        if coordinatorURL != nil {
+            fatalError("Coordinator URL already set. Create a new SonosClient to connect to another device.")
+        }
+        
         // Clean-up when app terminates.
         NotificationCenter.default.addObserver(forName: NSApplication.willTerminateNotification, object: nil, queue: .main) { _ in
             self.temporarySubscription?.cancel()
             self.subscriptions.removeAll()
         }
 
-        self.getDevices() {
+        self.getDevices(coordinatorName: deviceName) {
             callback()
         }
     }
     
     /// Retrieve Sonos devices on the local network.
-    private func getDevices(callback: @escaping () -> Void) {
+    private func getDevices(coordinatorName: String, callback: @escaping () -> Void) {
         let ssdp = SSDPSession()
         var sonosDevices = [SonosDevice]()
         
@@ -48,7 +47,7 @@ import SonosAPI
                 fatalError(error.description)
                 
             case .finished:
-                self.retrieveHouseholdCoordinators(for: sonosDevices) {
+                self.retrieveHouseholdCoordinators(coordinatorName: coordinatorName, for: sonosDevices) {
                     callback()
                 }
             }
@@ -65,7 +64,7 @@ import SonosAPI
     
     /// Retrieve zone/household groups with their coordinator id.
     /// - Parameter sonosDevices: Sonos devices.
-    private func retrieveHouseholdCoordinators(for sonosDevices: [SonosDevice], callback: @escaping () -> Void) {
+    private func retrieveHouseholdCoordinators(coordinatorName: String, for sonosDevices: [SonosDevice], callback: @escaping () -> Void) {
         guard sonosDevices.count > 0 else {
             print("Sonos devices was empty")
             return
@@ -112,80 +111,32 @@ import SonosAPI
                 }
                 
                 groups.sort { $0.name < $1.name }
-                let group = groups.first (where: { $0.name == self.coordinatorName })
+                let group = groups.first (where: { $0.name == coordinatorName })
                 if let group {
                     self.coordinatorURL = group.coordinatorURL
                     callback()
                 } else {
-                    fatalError("Sonos Group \(self.coordinatorName) cannot be found.")
+                    fatalError("Sonos Group \(coordinatorName) cannot be found.")
                 }
             }
         }
         session.run()
     }
     
-    /// Send keypress received from remote to Sonos coordinator..
-    /// - Parameters:
-    ///   - keypress: Remote keypress.
-    func sendKeypressToSonos(keypress: RemoteKey)   {
-        
+    func setRelativeVolume(adjustment: Int)   {
         guard let coordinatorURL else { fatalError("Coordinator URL is not set.") }
+            
+        let session = SOAPActionSession(service: .groupRenderingControl(action: .setRelativeGroupVolume, url: coordinatorURL, adjustment: adjustment))
         
-        var action: AVTransportAction!
-        var session: SOAPActionSession!
-        
-        switch keypress {
-            
-        case .KEY_PLAYPAUSE:
-            
-            if playPauseState == .play {
-                action = .pause
-            } else {
-                action = .play
-            }
-            
-        case .KEY_VOLUMEDOWN:
-            
-            session = SOAPActionSession(service: .groupRenderingControl(action: .setRelativeGroupVolume, url: coordinatorURL, adjustment: -2))
-            
-        case .KEY_VOLUMEUP:
-            
-            session = SOAPActionSession(service: .groupRenderingControl(action: .setRelativeGroupVolume, url: coordinatorURL, adjustment: 2))
-            
-        case .KEY_VOLUMEMUTE:
-            
-            session = SOAPActionSession(service: .groupRenderingControl(action: .setRelativeGroupVolume, url: coordinatorURL, adjustment: -200))
-            
-        case .KEY_LOADVOLUME:
-            
-            session = SOAPActionSession(service: .groupRenderingControl(action: .setRelativeGroupVolume, url: coordinatorURL, adjustment: 0))
-            
-        case .KEY_PREVIOUSSONG:
-            
-            action = .previous
-            
-        case .KEY_NEXTSONG:
-            
-            action = .next
-        }
-        
-        if session  == nil {
-            session = SOAPActionSession(service: .avTransport(action: action, url: coordinatorURL))
-        }
-        
+        // TODO make this async and dont exit the method until new volume is set
         temporarySubscription = session.onDataReceived.sink { completion in
-            
             self.temporarySubscription?.cancel()
-            
             switch completion {
-                
             case .finished:
                 break
             case .failure(let error):
                 print("**** Error in \(#function) : \(error.description) *****")
             }
-            
-            // VolumeUp and VolumeDown are the two actions that can generate a value (new volume setting).
         } receiveValue: { jsonData in
             parseJSONToObject(json: jsonData) { (newVolume:  NewVolume?) in
                 if let newVolume {

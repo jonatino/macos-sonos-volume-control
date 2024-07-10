@@ -34,10 +34,8 @@ func ping(host: String, completion: @escaping (Bool) -> Void) {
     connection.start(queue: .global())
 }
 
-print("jello2")
 // Usage
 ping(host: "172.27.0.1") { success in
-    print("Jello?")
     if success {
         print("Local network access is available.")
     } else {
@@ -88,37 +86,44 @@ let displayID = getPrimaryDisplayID() ?? 0
 
 print("Requesting accessibility permissions...")
 if requestAccessibilityPermissions() {
-    print("Accessibility permissions granted.")
-
     class MediaKeyTapDelegateImpl: MediaKeyTapDelegate {
         var sonosClient: SonosModel? = nil
+        var volumeBeforeMute: Int = 0
 
         func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
             if (event?.keyPressed == false && sonosClient != nil) {
                 //print("Media key event received: \(mediaKey) \(String(describing: event)) \(String(describing: modifiers))")
                 
-                switch mediaKey {
-                case .volumeUp:
-                    sonosClient!.sendKeypressToSonos(keypress: RemoteKey.KEY_VOLUMEUP)
-                    let currentVolume = sonosClient!.currentVolume
-                    print("Current volume up: \(currentVolume)")
-                    OSDUtils.showOsd(displayID: displayID, command: .audioSpeakerVolume, value: normalize(currentVolume))
-                    
-                case .volumeDown:
-                    sonosClient!.sendKeypressToSonos(keypress: RemoteKey.KEY_VOLUMEDOWN)
-                    let currentVolume = sonosClient!.currentVolume
-                    print("Current volume down: \(currentVolume)")
-                    OSDUtils.showOsd(displayID: displayID, command: .audioSpeakerVolume, value: normalize(currentVolume))
-                    
-                case .mute:
-                    sonosClient!.sendKeypressToSonos(keypress: RemoteKey.KEY_VOLUMEMUTE)
-                    let currentVolume = sonosClient!.currentVolume
-                    print("Current volume mute: \(currentVolume)")
-                    // TODO restore this volume after we unmute.
-                    OSDUtils.showOsd(displayID: displayID, command: .audioMuteScreenBlank, value: 0)
-                default:
-                    print("Unhandled media key: \(mediaKey)")
-                    break
+                if mediaKey == .volumeUp || mediaKey == .volumeDown || mediaKey == .mute {
+                    // This means we're muted!
+                    if volumeBeforeMute != 0 {
+                        print("Unmuting. Restoring volume: \(volumeBeforeMute)")
+                        sonosClient!.setRelativeVolume(adjustment: volumeBeforeMute)
+                        OSDUtils.showOsd(displayID: displayID, command: .audioSpeakerVolume, value: normalize(volumeBeforeMute))
+                        volumeBeforeMute = 0
+                    } else {
+                        var adjustment: Int!
+                        var command: OSDUtils.Command = .audioSpeakerVolume
+                        
+                        let currentVolume = sonosClient!.currentVolume
+                        
+                        if mediaKey == .volumeUp {
+                            print("Volume up: \(currentVolume)")
+                            adjustment = 2
+                        } else if mediaKey == .volumeDown {
+                            print("Volume down: \(currentVolume)")
+                            adjustment = -2
+                        } else if mediaKey == .mute {
+                            print("Muting. Saving current volume: \(currentVolume)")
+                            volumeBeforeMute = currentVolume
+                            adjustment = -100
+                            command = .audioMuteScreenBlank
+                        }
+                        
+                        sonosClient!.setRelativeVolume(adjustment: adjustment)
+                        OSDUtils.showOsd(displayID: displayID, command: command, value: (volumeBeforeMute != 0) ? 0 : normalize(currentVolume))
+                        
+                    }
                 }
             }
         }
@@ -128,14 +133,14 @@ if requestAccessibilityPermissions() {
     let delegate = MediaKeyTapDelegateImpl()
     let mediaKeyTap = MediaKeyTap(delegate: delegate, on: .keyDownAndUp)
     
-    print("Bind media keys")
+    print("Binding media keys")
     mediaKeyTap.start()
     
     print("Connecting to sonos device");
     let sonosClient = SonosModel()
-    sonosClient.connect() {
-        print("Connected loading volume");
-        sonosClient.sendKeypressToSonos(keypress: RemoteKey.KEY_LOADVOLUME)
+    sonosClient.connect(deviceName: "Bedroom") {
+        print("Connected. Loading current volume");
+        sonosClient.setRelativeVolume(adjustment: 0)
         delegate.sonosClient = sonosClient
     }
     
