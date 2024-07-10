@@ -13,5 +13,7 @@ Future goals (I'm open to contributions, but any additional complexity will be r
 - Very basic ui with single input for Sonos device name
 
 Credits:
+
 https://github.com/MonitorControl/MonitorControl - For the volume OSD stuff
+
 https://github.com/denisblondeau/SonosAPIDemo - For the sonos api
