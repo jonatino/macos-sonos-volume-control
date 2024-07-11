@@ -91,39 +91,36 @@ if requestAccessibilityPermissions() {
         var volumeBeforeMute: Int = 0
 
         func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
-            if (event?.keyPressed == false && sonosClient != nil) {
-                //print("Media key event received: \(mediaKey) \(String(describing: event)) \(String(describing: modifiers))")
-                
-                if mediaKey == .volumeUp || mediaKey == .volumeDown || mediaKey == .mute {
-                    // This means we're muted!
-                    if volumeBeforeMute != 0 {
-                        print("Unmuting. Restoring volume: \(volumeBeforeMute)")
-                        sonosClient!.setRelativeVolume(adjustment: volumeBeforeMute)
-                        OSDUtils.showOsd(displayID: displayID, command: .audioSpeakerVolume, value: normalize(volumeBeforeMute))
-                        volumeBeforeMute = 0
-                    } else {
-                        var adjustment: Int!
-                        var command: OSDUtils.Command = .audioSpeakerVolume
-                        
-                        let currentVolume = sonosClient!.currentVolume
-                        
-                        if mediaKey == .volumeUp {
-                            print("Volume up: \(currentVolume)")
-                            adjustment = 2
-                        } else if mediaKey == .volumeDown {
-                            print("Volume down: \(currentVolume)")
-                            adjustment = -2
-                        } else if mediaKey == .mute {
-                            print("Muting. Saving current volume: \(currentVolume)")
-                            volumeBeforeMute = currentVolume
-                            adjustment = -100
-                            command = .audioMuteScreenBlank
-                        }
-                        
-                        sonosClient!.setRelativeVolume(adjustment: adjustment)
-                        OSDUtils.showOsd(displayID: displayID, command: command, value: (volumeBeforeMute != 0) ? 0 : normalize(currentVolume))
-                        
+            if (sonosClient != nil) {
+                print("Media key event received: \(mediaKey) \(String(describing: event)) \(String(describing: modifiers))")
+
+                // This means we're muted!
+                if volumeBeforeMute != 0 {
+                    print("Unmuting. Restoring volume: \(volumeBeforeMute)")
+                    sonosClient!.setRelativeVolume(adjustment: volumeBeforeMute)
+                    OSDUtils.showOsd(displayID: displayID, command: .audioSpeakerVolume, value: normalize(volumeBeforeMute))
+                    volumeBeforeMute = 0
+                } else {
+                    var adjustment: Int!
+                    var command: OSDUtils.Command = .audioSpeakerVolume
+                    
+                    let currentVolume = sonosClient!.currentVolume
+                    
+                    if mediaKey == .volumeUp {
+                        print("Volume up: \(currentVolume)")
+                        adjustment = 2
+                    } else if mediaKey == .volumeDown {
+                        print("Volume down: \(currentVolume)")
+                        adjustment = -2
+                    } else if mediaKey == .mute {
+                        print("Muting. Saving current volume: \(currentVolume)")
+                        volumeBeforeMute = currentVolume
+                        adjustment = -100
+                        command = .audioMuteScreenBlank
                     }
+                    
+                    sonosClient!.setRelativeVolume(adjustment: adjustment)
+                    OSDUtils.showOsd(displayID: displayID, command: command, value: (volumeBeforeMute != 0) ? 0 : normalize(currentVolume))
                 }
             }
         }
@@ -131,7 +128,7 @@ if requestAccessibilityPermissions() {
     
     print("Starting media key monitoring...")
     let delegate = MediaKeyTapDelegateImpl()
-    let mediaKeyTap = MediaKeyTap(delegate: delegate, on: .keyDownAndUp)
+    let mediaKeyTap = MediaKeyTap(delegate: delegate, on: .keyUp, for: [MediaKey.volumeUp, MediaKey.volumeDown, MediaKey.mute])
     
     print("Binding media keys")
     mediaKeyTap.start()
