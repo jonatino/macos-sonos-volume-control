@@ -3,6 +3,22 @@ import MediaKeyTap
 import AppKit
 import Foundation
 
+import CoreAudio
+import AudioToolbox
+
+// CONFIGURE THESE
+
+// This is the name of the Sonos device that you want to control the volume of
+let SONOS_DEVICE_NAME: String = "Bedroom"
+
+// This is the ip address of any device on your local network. Used to test if permissions is granted
+let GATEWAY_LAN_PING_IP: String = "172.27.0.1"
+
+// This is the name of the HDMI audio output device in macOS
+let HDMI_SOUND_OUTPUT_DEVICE_NAME: String = "LG TV SSCR2"
+
+// END OF CONFIGURE
+
 func normalize(_ value: Int) -> Float {
     return min(max(Float(value) / 100.0, 0.0), 1.0)
 }
@@ -31,7 +47,7 @@ mediaKeyTap.start()
 
 print("Connecting to sonos device");
 let sonosClient = SonosModel()
-sonosClient.connect(deviceName: "Bedroom") {
+sonosClient.connect(deviceName: SONOS_DEVICE_NAME) {
     print("Connected. Loading current volume");
     sonosClient.setRelativeVolume(adjustment: 0)
     delegate.sonosClient = sonosClient
@@ -46,6 +62,26 @@ class MediaKeyTapDelegateImpl: MediaKeyTapDelegate {
 
     func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
         if (sonosClient != nil) {
+            let outputDeviceName = getDefaultOutputDeviceName()
+            if outputDeviceName != HDMI_SOUND_OUTPUT_DEVICE_NAME {
+                print("Sound output device changed to:", outputDeviceName as Any)
+                
+                print("Disable media key hook")
+                mediaKeyTap.stop()
+                
+                print("Waiting until device \(HDMI_SOUND_OUTPUT_DEVICE_NAME) is plugged in or activated again.")
+                while true {
+                    let outputDeviceName = getDefaultOutputDeviceName()
+                    if outputDeviceName != HDMI_SOUND_OUTPUT_DEVICE_NAME {
+                        sleep(3)
+                    } else {
+                        print("Sonos device \(outputDeviceName!) is active.")
+                        print("Rebinding media keys")
+                        mediaKeyTap.start()
+                        return
+                    }
+                }
+            }
             //print("Media key event received: \(mediaKey) \(String(describing: event)) \(String(describing: modifiers))")
 
             // This means we're muted!

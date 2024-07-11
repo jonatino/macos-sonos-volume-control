@@ -14,7 +14,7 @@ func requestLocalNetworkAccessOrWait() {
     
     while !accessGranted {
         // TODO find a way to automate this? Dont hardcode ip
-        ping(host: "172.27.0.1") { success in
+        ping(host: GATEWAY_LAN_PING_IP) { success in
             accessGranted = success
             if !success {
                 if !flagged {

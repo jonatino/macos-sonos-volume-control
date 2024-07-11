@@ -18,6 +18,7 @@
 		668B0D0D2C367F8500C159E4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668B0D0C2C367F8500C159E4 /* main.swift */; };
 		6694F22D2C3C8944007E42A0 /* OSDUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6694F22C2C3C8941007E42A0 /* OSDUtils.swift */; };
 		66BC12F82C3F8A26009117F5 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BC12F72C3F8A23009117F5 /* Permissions.swift */; };
+		66BC12FA2C3F8E9F009117F5 /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BC12F92C3F8E9C009117F5 /* AudioUtils.swift */; };
 		66D57F392C3BB5760027878C /* SonosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D57F382C3BB5730027878C /* SonosModel.swift */; };
 		66FEA5742C3BC22500C46BCA /* SonosAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 66FEA5732C3BC22500C46BCA /* SonosAPI */; };
 		66FEA5772C3BC25C00C46BCA /* MediaKeyTap in Frameworks */ = {isa = PBXBuildFile; productRef = 66FEA5762C3BC25C00C46BCA /* MediaKeyTap */; };
@@ -50,6 +51,7 @@
 		668B0D142C36801C00C159E4 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		6694F22C2C3C8941007E42A0 /* OSDUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSDUtils.swift; sourceTree = "<group>"; };
 		66BC12F72C3F8A23009117F5 /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
+		66BC12F92C3F8E9C009117F5 /* AudioUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUtils.swift; sourceTree = "<group>"; };
 		66D57F382C3BB5730027878C /* SonosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonosModel.swift; sourceTree = "<group>"; };
 		66FEA5712C3BBF7D00C46BCA /* sonosctl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sonosctl; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -95,6 +97,7 @@
 		668B0D0B2C367F8500C159E4 /* mac-sonos-volume-control */ = {
 			isa = PBXGroup;
 			children = (
+				66BC12F92C3F8E9C009117F5 /* AudioUtils.swift */,
 				66BC12F72C3F8A23009117F5 /* Permissions.swift */,
 				6694F22C2C3C8941007E42A0 /* OSDUtils.swift */,
 				66D57F382C3BB5730027878C /* SonosModel.swift */,
@@ -187,6 +190,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66BC12FA2C3F8E9F009117F5 /* AudioUtils.swift in Sources */,
 				66BC12F82C3F8A26009117F5 /* Permissions.swift in Sources */,
 				6694F22D2C3C8944007E42A0 /* OSDUtils.swift in Sources */,
 				66D57F392C3BB5760027878C /* SonosModel.swift in Sources */,
